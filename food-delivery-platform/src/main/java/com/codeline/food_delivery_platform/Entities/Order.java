@@ -1,12 +1,8 @@
-package com.codeline.food_delivery_platform.entities;
-
-import jakarta.persistence.*;
-
-import lombok.Data;
+package com.codeline.food_delivery_platform.Entities;
 
 import java.util.Date;
 
-public class Order extends BaseEntity{
+public class Order extends BaseClass {
     private String orderCode;
     private Date orderDate;
     private String status;

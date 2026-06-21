@@ -1,16 +1,23 @@
-package com.codeline.food_delivery_platform.entities;
+package com.codeline.food_delivery_platform.Entities;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @MappedSuperclass
 @Data
-public class Person extends BaseEntity{
+@AllArgsConstructor
+@NoArgsConstructor
+public class BaseUser extends BaseClass {
     private String firstName;
     private String lastName;
+
     @Column(unique = true)
     private String email;
-    private String phone;
+
+    private String phoneNumber;
     private String passwordHash;
 }
