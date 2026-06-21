@@ -1,0 +1,21 @@
+package com.codeline.food_delivery_platform.entities;
+
+
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Payment extends BaseEntity{
+    private String paymentMethod;
+    private String status;
+    private Double amount;
+    private String transactionRef;
+    private Date processedAt;
+}
