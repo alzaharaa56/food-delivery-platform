@@ -1,6 +1,6 @@
-package com.codeline.food_delivery_platform.repositories;
+package com.codeline.food_delivery_platform.Repositories;
 
-import com.codeline.food_delivery_platform.entities.Customer;
+import com.codeline.food_delivery_platform.Entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

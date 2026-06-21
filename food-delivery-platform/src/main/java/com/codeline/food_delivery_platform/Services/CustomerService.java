@@ -1,8 +1,8 @@
-package com.codeline.food_delivery_platform.services;
+package com.codeline.food_delivery_platform.Services;
 
 import com.codeline.food_delivery_platform.dtos.CustomerRequestDTO;
-import com.codeline.food_delivery_platform.entities.Customer;
-import com.codeline.food_delivery_platform.repositories.CustomerRepository;
+import com.codeline.food_delivery_platform.Entities.Customer;
+import com.codeline.food_delivery_platform.Repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

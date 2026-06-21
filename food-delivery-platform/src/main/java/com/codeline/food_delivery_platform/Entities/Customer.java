@@ -1,4 +1,4 @@
-package com.codeline.food_delivery_platform.entities;
+package com.codeline.food_delivery_platform.Entities;
 import jakarta.persistence.*;
 import lombok.*;
 
