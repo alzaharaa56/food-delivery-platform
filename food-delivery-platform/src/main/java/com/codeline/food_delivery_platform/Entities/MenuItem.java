@@ -1,10 +1,7 @@
 package com.codeline.food_delivery_platform.Entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +23,7 @@ public class MenuItem extends BaseClass {
     private Integer calories;
 
     @ManyToOne
+    @JoinColumn(name = "menu_item_id")
     private Restaurant restaurant;
 
     @ManyToMany(mappedBy = "menuItem")
