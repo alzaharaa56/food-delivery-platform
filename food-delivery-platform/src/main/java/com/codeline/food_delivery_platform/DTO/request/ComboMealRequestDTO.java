@@ -1,0 +1,34 @@
+package com.codeline.food_delivery_platform.DTO.request;
+
+import com.codeline.food_delivery_platform.Entities.ComboMeal;
+import com.codeline.food_delivery_platform.Entities.MenuItem;
+import com.codeline.food_delivery_platform.Repositories.MenuItemRepository;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
+
+public class ComboMealRequestDTO {
+    @NotBlank(message = "Combo name is required")
+    private String comboName;
+
+    private String description;
+
+    @NotNull(message = "Total Price Required")
+    @DecimalMin(value = "0.0", message = "Price must be positive")
+    private Double totalPrice;
+
+    @NotEmpty(message = "Combo must contain at least one menu item id")
+    private List<Integer> menuItem;
+
+    public ComboMeal toEntity(){
+        ComboMeal comboMeal = new ComboMeal();
+        comboMeal.setComboName(comboName);
+        comboMeal.setDescription(description);
+        comboMeal.setTotalPrice(totalPrice);
+
+        return comboMeal;
+    }
+}
