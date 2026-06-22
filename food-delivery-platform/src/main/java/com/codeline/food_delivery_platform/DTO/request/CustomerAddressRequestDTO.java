@@ -22,21 +22,5 @@ public class CustomerAddressRequestDTO {
     @NotBlank(message = "Default status must be specified")
     private Boolean isDefault;
 
-    public CustomerAddress toEntity(){
-        CustomerAddress address = new CustomerAddress();
-        address.setStreet(street);
-        address.setCity(city);
-        address.setBuilding(building);
-        address.setIsDefault(isDefault);
 
-        return address;
-    }
-
-    //update
-    public void applayTo(CustomerAddress address){
-        address.setStreet(this.street);
-        address.setCity(this.city);
-        address.setBuilding(this.building);
-        address.setIsDefault(this.isDefault);
-    }
 }
