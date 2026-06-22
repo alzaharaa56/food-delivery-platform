@@ -1,0 +1,55 @@
+package com.codeline.food_delivery_platform.DTO.response;
+
+import com.codeline.food_delivery_platform.DTO.summary.CustomerSummaryDTO;
+import com.codeline.food_delivery_platform.DTO.summary.RestaurantSummaryDTO;
+import com.codeline.food_delivery_platform.Entities.FoodOrder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class FoodOrderResponseDTO {
+    private Integer id;
+    private String orderCode;
+    private LocalDateTime orderDate;
+    private String status;
+    private Double subtotal;
+    private Double deliveryFee;
+    private Double discountAmount;
+    private Double totalAmount;
+    private String deliveryNotes;
+
+    private CustomerSummaryDTO customer;
+    private RestaurantSummaryDTO restaurant;
+    private List<OrderItemResponseDTO> items;
+
+    public static FoodOrderResponseDTO fromEntity(FoodOrder order) {
+        if (order == null) return null;
+        FoodOrderResponseDTO dto = new FoodOrderResponseDTO();
+        dto.setId(order.getId());
+        dto.setOrderCode(order.getOrderCode());
+        dto.setOrderDate(order.getOrderDate());
+        dto.setStatus(order.getStatus());
+        dto.setSubtotal(order.getSubtotal());
+        dto.setDeliveryFee(order.getDeliveryFee());
+        dto.setDiscountAmount(order.getDiscountAmount());
+        dto.setTotalAmount(order.getTotalAmount());
+        dto.setDeliveryNotes(order.getDeliveryNotes());
+
+        dto.setCustomer(CustomerSummaryDTO.fromEntity(order.getCustomer()));
+        dto.setRestaurant(RestaurantSummaryDTO.fromEntity(order.getRestaurant()));
+
+        if (order.getOrderItems() != null) {
+            dto.setItems(order.getOrderItems().stream()
+                    .map(OrderItemResponseDTO::fromEntity)
+                    .collect(Collectors.toList()));
+        }
+        return dto;
+    }
+}
