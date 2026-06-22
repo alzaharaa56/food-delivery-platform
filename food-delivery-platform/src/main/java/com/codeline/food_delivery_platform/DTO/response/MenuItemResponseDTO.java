@@ -1,4 +1,4 @@
-package com.codeline.food_delivery_platform.DTO.request;
+package com.codeline.food_delivery_platform.DTO.response;
 
 
 import com.codeline.food_delivery_platform.Entities.MenuItem;
