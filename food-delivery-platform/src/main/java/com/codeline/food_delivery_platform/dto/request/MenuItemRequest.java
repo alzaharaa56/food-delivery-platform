@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 public class MenuItemRequest {
@@ -29,7 +28,6 @@ public class MenuItemRequest {
     @NotNull(message = "Restaurant ID is required")
     private Integer restaurantId;
 
-
     public MenuItem toEntity(Restaurant restaurant) {
         MenuItem item = new MenuItem();
         item.setName(this.name);
@@ -41,4 +39,6 @@ public class MenuItemRequest {
         item.setIsAvailable(true);
         return item;
     }
+
+
 }
