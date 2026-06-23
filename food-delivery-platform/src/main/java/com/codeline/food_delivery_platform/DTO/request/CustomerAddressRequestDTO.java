@@ -1,5 +1,4 @@
 package com.codeline.food_delivery_platform.DTO.request;
-
 import com.codeline.food_delivery_platform.Entities.CustomerAddress;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -22,5 +21,21 @@ public class CustomerAddressRequestDTO {
     @NotBlank(message = "Default status must be specified")
     private Boolean isDefault;
 
+    public CustomerAddress toEntity(){
+        CustomerAddress address = new CustomerAddress();
+        address.setStreet(street);
+        address.setCity(city);
+        address.setBuilding(building);
+        address.setIsDefault(isDefault);
 
+        return address;
+    }
+
+
+    public void applayTo(CustomerAddress address){
+        address.setStreet(this.street);
+        address.setCity(this.city);
+        address.setBuilding(this.building);
+        address.setIsDefault(this.isDefault);
+    }
 }
