@@ -1,6 +1,6 @@
 package com.codeline.food_delivery_platform.DTO.summary;
 
-import com.codeline.food_delivery_platform.Entities.Restaurant;
+import com.codeline.food_delivery_platform.entities.Restaurant;
 import lombok.Getter;
 import lombok.Setter;
 

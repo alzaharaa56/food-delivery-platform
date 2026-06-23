@@ -1,7 +1,7 @@
 package com.codeline.food_delivery_platform.DTO.request;
 
-import com.codeline.food_delivery_platform.Entities.Restaurant;
-import com.codeline.food_delivery_platform.Entities.RestaurantOwner;
+import com.codeline.food_delivery_platform.entities.Restaurant;
+import com.codeline.food_delivery_platform.entities.RestaurantOwner;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;

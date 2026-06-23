@@ -1,6 +1,6 @@
 package com.codeline.food_delivery_platform.DTO.request;
 
-import com.codeline.food_delivery_platform.Entities.DeliveryDriver;
+import com.codeline.food_delivery_platform.entities.DeliveryDriver;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

@@ -1,6 +1,6 @@
 package com.codeline.food_delivery_platform.DTO.response;
 
-import com.codeline.food_delivery_platform.Entities.OrderItem;
+import com.codeline.food_delivery_platform.entities.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 

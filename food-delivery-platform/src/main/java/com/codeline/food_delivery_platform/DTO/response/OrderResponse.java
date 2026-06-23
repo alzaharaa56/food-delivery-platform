@@ -1,7 +1,7 @@
 package com.codeline.food_delivery_platform.DTO.response;
 import com.codeline.food_delivery_platform.DTO.summary.CustomerSummaryResponse;
 import com.codeline.food_delivery_platform.DTO.summary.RestaurantSummaryResponse;
-import com.codeline.food_delivery_platform.Entities.Order;
+import com.codeline.food_delivery_platform.entities.Order;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
