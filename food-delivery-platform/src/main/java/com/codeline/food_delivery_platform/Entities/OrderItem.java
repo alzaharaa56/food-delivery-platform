@@ -1,27 +1,33 @@
 package com.codeline.food_delivery_platform.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "order_items")
+@Getter
+@Setter
 @NoArgsConstructor
-public class OrderItem extends BaseClass{
+@AllArgsConstructor
+public class OrderItem extends BaseEntity {
+
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "unit_price", nullable = false)
     private Double unitPrice;
+
+    @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 
+    @Column(name = "special_instructions")
     private String specialInstructions;
 
-    @ManyToOne
-    private FoodOrder order;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_item_id", nullable = false)
     private MenuItem menuItem;
-
 }

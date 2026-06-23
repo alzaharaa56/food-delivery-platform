@@ -1,34 +1,35 @@
 package com.codeline.food_delivery_platform.Entities;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "menu_items")
+@Getter
+@Setter
 @NoArgsConstructor
-public class MenuItem extends BaseClass {
+@AllArgsConstructor
+public class MenuItem extends BaseEntity {
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "price", nullable = false)
     private Double price;
 
-    private Boolean isAvailable;
-    private Boolean isVegetarian;
+    @Column(name = "is_available", nullable = false)
+    private Boolean isAvailable = true;
 
+    @Column(name = "is_vegetarian", nullable = false)
+    private Boolean isVegetarian = false;
+
+    @Column(name = "calories")
     private Integer calories;
 
-    @ManyToOne
-    @JoinColumn(name = "menu_item_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
-
-    @ManyToMany(mappedBy = "menuItem")
-    private List<ComboMeal> comboMeals;
-
-    @OneToMany(mappedBy = "menuItem")
-    private  List<OrderItem> orderItems;
 }

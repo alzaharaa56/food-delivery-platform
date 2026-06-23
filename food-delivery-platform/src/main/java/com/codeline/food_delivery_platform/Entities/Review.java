@@ -1,30 +1,33 @@
 package com.codeline.food_delivery_platform.Entities;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "reviews")
+@Getter
+@Setter
 @NoArgsConstructor
-public class Review extends BaseClass{
+@AllArgsConstructor
+public class Review extends BaseEntity {
+
+    @Column(name = "target_type", nullable = false)
     private String targetType;
+
+    @Column(name = "rating", nullable = false)
     private Integer rating;
+
+    @Column(name = "comment")
     private String comment;
 
-    private LocalDateTime createdAt;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @ManyToOne(optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @ManyToOne(optional = true)
-    private DeliveryDriver deliveryDriver;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
+    private DeliveryDriver driver;
 }

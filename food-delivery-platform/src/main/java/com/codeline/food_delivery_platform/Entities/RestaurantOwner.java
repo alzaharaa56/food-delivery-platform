@@ -1,32 +1,35 @@
 package com.codeline.food_delivery_platform.Entities;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@Data
+@Table(name = "restaurant_owners")
+@Getter
+@Setter
 @NoArgsConstructor
-public class RestaurantOwner extends BaseUser{
+@AllArgsConstructor
+public class RestaurantOwner extends BaseEntity {
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+
+    @Column(name = "business_license_code", nullable = false, unique = true)
     private String businessLicenseCode;
 
-    @OneToMany(mappedBy = "restaurantOwner")
-    private List<Restaurant> restaurants;
-    private @NotBlank(message = "Phone number is required")
-    @Pattern(regexp = "^\\+?[0-9]{8,15}$", message = "Phone number must be between 8 and 15 digits") String phone;
-
-    public void setPhone(@NotBlank(message = "Phone number is required") @Pattern(regexp = "^\\+?[0-9]{8,15}$", message = "Phone number must be between 8 and 15 digits") String phone) {
-        this.phone = phone;
-    }
-
-    public @NotBlank(message = "Phone number is required") @Pattern(regexp = "^\\+?[0-9]{8,15}$", message = "Phone number must be between 8 and 15 digits") String getPhone() {
-        return phone;
-    }
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Restaurant> restaurants = new ArrayList<>();
 }

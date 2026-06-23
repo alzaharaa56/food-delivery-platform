@@ -4,11 +4,10 @@ import com.codeline.food_delivery_platform.Entities.Delivery;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
+import java.util.Optional;
 
 public interface DeliveryRepository extends JpaRepository<Delivery, Integer> {
-    @Query("select d from Delivery d where d.driver.id = :driverId AND d.status = :status AND d.isActive = true")
-    List<Delivery> findByDriverIdAndStatus(@Param("driverId") Integer id, @Param("status") String status);
 
+@Query("SELECT d FROM Delivery d WHERE d.trackingCode = :code AND d.isActive = true")
+Optional<Delivery> findActiveByTrackingCode(@Param("code") String code);
 }

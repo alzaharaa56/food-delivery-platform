@@ -1,27 +1,32 @@
 package com.codeline.food_delivery_platform.Entities;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "payments")
+@Getter
+@Setter
 @NoArgsConstructor
-public class Payment extends BaseClass{
+@AllArgsConstructor
+public class Payment extends BaseEntity {
+
+    @Column(name = "payment_method", nullable = false)
     private String paymentMethod;
+
+    @Column(name = "status", nullable = false)
     private String status;
+
+    @Column(name = "amount", nullable = false)
+    private Double amount;
+    @Column(name = "transaction_ref", unique = true)
     private String transactionRef;
 
-    private Double amount;
-
+    @Column(name = "processed_at")
     private LocalDateTime processedAt;
 
-    @OneToOne
-    private FoodOrder order;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, unique = true)
+    private Order order;
 }

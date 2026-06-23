@@ -1,22 +1,30 @@
 package com.codeline.food_delivery_platform.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "customer_addresses")
+@Getter
+@Setter
 @NoArgsConstructor
-public class CustomerAddress extends BaseClass {
+@AllArgsConstructor
+public class CustomerAddress extends BaseEntity {
+
+    @Column(name = "street", nullable = false)
     private String street;
+
+    @Column(name = "city", nullable = false)
     private String city;
+
+    @Column(name = "building", nullable = false)
     private String building;
 
-    private Boolean isDefault;
+    @Column(name = "is_default", nullable = false)
+    private Boolean isDefault = false;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 }

@@ -1,29 +1,37 @@
 package com.codeline.food_delivery_platform.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "deliveries")
+@Getter
+@Setter
 @NoArgsConstructor
-public class Delivery extends BaseClass{
-    private String trackingCode;
-    private String status;
+@AllArgsConstructor
+public class Delivery extends BaseEntity {
 
+    @Column(name = "tracking_code", nullable = false, unique = true)
+    private String trackingCode;
+
+    @Column(name = "status", nullable = false)
+    private String status; // مثال: ASSIGNED, PICKED_UP, DELIVERED
+
+    @Column(name = "assigned_at")
     private LocalDateTime assignedAt;
+
+    @Column(name = "picked_up_at")
     private LocalDateTime pickedUpAt;
+
+    @Column(name = "delivered_at")
     private LocalDateTime deliveredAt;
 
-    @OneToOne
-    private FoodOrder order;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, unique = true)
+    private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
     private DeliveryDriver driver;
 }

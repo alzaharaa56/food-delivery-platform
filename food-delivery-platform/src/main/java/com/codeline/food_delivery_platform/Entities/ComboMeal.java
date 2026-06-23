@@ -1,29 +1,40 @@
 package com.codeline.food_delivery_platform.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "combo_meals")
+@Getter
+@Setter
 @NoArgsConstructor
-public class ComboMeal extends BaseClass{
+@AllArgsConstructor
+public class ComboMeal extends BaseEntity {
+
+    @Column(name = "combo_name", nullable = false)
     private String comboName;
+
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 
-    private Boolean isAvailable;
+    @Column(name = "is_available", nullable = false)
+    private Boolean isAvailable = true;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @ManyToMany
-    private List<MenuItem> menuItem;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "combo_meal_menu_item",
+            joinColumns = @JoinColumn(name = "combo_meal_id"),
+            inverseJoinColumns = @JoinColumn(name = "menu_item_id")
+    )
+    private List<MenuItem> menuItems = new ArrayList<>();
 }
