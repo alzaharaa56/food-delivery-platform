@@ -35,8 +35,8 @@ public class CustomerRegisterRequest {
         customer.setLastName(this.lastName);
         customer.setEmail(this.email);
         customer.setPhone(this.phone);
-        customer.setPasswordHash(passwordHash); // Passed encrypted password from the Service
-        customer.setCustomerCode(generatedCode); // Passed automatically generated code from the Service
+        customer.setPasswordHash(passwordHash);
+        customer.setCustomerCode(generatedCode);
         customer.setLoyaltyPoints(0);
         return customer;
     }
