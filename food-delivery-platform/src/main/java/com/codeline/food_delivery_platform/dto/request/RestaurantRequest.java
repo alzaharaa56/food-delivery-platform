@@ -52,4 +52,21 @@ public class RestaurantRequest {
         restaurant.setAcceptingOrders(true);
         return restaurant;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCuisineType() {
+        return cuisineType;
+    }
+
+    public Double getDeliveryFee() {
+        return deliveryFee;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
 }
+
