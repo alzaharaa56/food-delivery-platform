@@ -1,32 +1,63 @@
 package com.codeline.food_delivery_platform.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "payments")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Payment extends BaseEntity {
+public class Payment {
 
-    @Column(name = "payment_method", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "payment_method")
     private String paymentMethod;
 
-    @Column(name = "status", nullable = false)
     private String status;
-
-    @Column(name = "amount", nullable = false)
     private Double amount;
-    @Column(name = "transaction_ref", unique = true)
-    private String transactionRef;
 
-    @Column(name = "processed_at")
-    private LocalDateTime processedAt;
+    @Column(name = "payment_date")
+    private LocalDateTime paymentDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, unique = true)
-    private Order order;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 }
