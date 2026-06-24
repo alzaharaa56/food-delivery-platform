@@ -2,6 +2,7 @@ package com.codeline.food_delivery_platform.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import com.codeline.food_delivery_platform.entities.Order;
 
 @Entity
 @Table(name = "payments")
@@ -20,6 +21,8 @@ public class Payment {
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
 
+    @OneToOne(mappedBy = "payment")
+    private Order order;
 
     public Integer getId() {
         return id;
@@ -59,5 +62,13 @@ public class Payment {
 
     public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

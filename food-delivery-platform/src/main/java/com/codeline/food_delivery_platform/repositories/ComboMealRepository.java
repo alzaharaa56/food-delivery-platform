@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ComboMealRepository extends JpaRepository<ComboMeal, Integer> {
 
-@Query("SELECT c FROM ComboMeal c WHERE c.restaurant.id = :restaurantId AND c.isActive = true AND c.isAvailable = true")
+    @Query(value = "SELECT * FROM combo_meal WHERE restaurant_id = :restaurantId AND is_active = true AND is_available = true", nativeQuery = true)
 List<ComboMeal> findActiveCombosByRestaurantId(@Param("restaurantId") Integer restaurantId);
 }

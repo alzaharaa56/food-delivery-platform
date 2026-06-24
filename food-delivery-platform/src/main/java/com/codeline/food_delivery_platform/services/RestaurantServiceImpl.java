@@ -31,6 +31,9 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurant.setDescription(request.getDescription());
         restaurant.setDeliveryFee(request.getDeliveryFee());
         restaurant.setOwner(owner);
+        restaurant.setOpeningTime(request.getOpeningTime());
+        restaurant.setClosingTime(request.getClosingTime());
+        restaurant.setMinOrderAmount(request.getMinOrderAmount());
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 

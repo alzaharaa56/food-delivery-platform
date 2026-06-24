@@ -6,6 +6,7 @@ import com.codeline.food_delivery_platform.dto.summary.CustomerSummaryResponse;
 import com.codeline.food_delivery_platform.entities.Customer;
 import com.codeline.food_delivery_platform.exceptions.ResourceNotFoundException;
 import com.codeline.food_delivery_platform.repositories.CustomerRepository;
+import com.codeline.food_delivery_platform.utils.HelperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +25,17 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IllegalArgumentException("Email is already registered!");
         }
 
-
         Customer customer = new Customer();
         customer.setFirstName(request.getFirstName());
         customer.setLastName(request.getLastName());
         customer.setEmail(request.getEmail());
         customer.setPhone(request.getPhone());
         customer.setPasswordHash("hashed_" + request.getPassword());
+
+        customer.setCustomerCode(HelperUtils.generateCode("CUS"));
+
+        customer.setCreatedDate(java.time.LocalDateTime.now());
+        customer.setIsActive(true);
         Customer savedCustomer = customerRepository.save(customer);
         return CustomerResponse.fromEntity(savedCustomer);
     }

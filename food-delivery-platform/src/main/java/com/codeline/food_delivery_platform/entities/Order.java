@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order extends BaseEntity {
-
     @Column(name = "order_code", nullable = false, unique = true)
     private String orderCode;
 
@@ -21,22 +20,16 @@ public class Order extends BaseEntity {
 
     @Column(name = "status", nullable = false)
     private String status;
-
     @Column(name = "subtotal", nullable = false)
     private Double subtotal;
-
     @Column(name = "delivery_fee", nullable = false)
     private Double deliveryFee;
-
     @Column(name = "discount_amount", nullable = false)
     private Double discountAmount = 0.0;
-
     @Column(name = "total_amount", nullable = false)
     private Double totalAmount;
-
     @Column(name = "delivery_notes")
     private String deliveryNotes;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
@@ -44,15 +37,14 @@ public class Order extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
-
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Delivery delivery;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Payment payment;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+@JoinColumn(name = "payment_id")
+private Payment payment;
 
 
 }
