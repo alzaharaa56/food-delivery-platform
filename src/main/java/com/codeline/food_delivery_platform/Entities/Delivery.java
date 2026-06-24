@@ -1,0 +1,35 @@
+package com.codeline.food_delivery_platform.Entities;
+
+import com.codeline.food_delivery_platform.Enums.DeliveryStatus;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "deliveries")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Delivery extends BaseEntity{
+
+    private String trackingCode;
+    private DeliveryStatus status;
+    private LocalDateTime assignedAt;
+    private LocalDateTime pickedUpAt;
+    private LocalDateTime deliveredAt;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", unique = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private DeliveryDriver deliveryDriver;
+}
