@@ -44,3 +44,4 @@ public class Customer extends BaseEntity {
     )
     private List<Review> reviews;
 }
+
