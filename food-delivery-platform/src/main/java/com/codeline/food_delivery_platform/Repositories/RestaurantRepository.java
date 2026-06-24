@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
-      @Query("SELECT r FROM Restaurant r WHERE LOWER(r.cuisineType) = LOWER(:cuisineType) AND r.isActive = true")
-      List<Restaurant> findByCuisineTypeIgnoreCase(@Param("cuisineType") String cuisineType);
+      @Query("SELECT r FROM Restaurant r WHERE LOWER(r.cuisineType) = LOWER(:cuisine) AND r.isActive = true")
+      List<Restaurant> findByCuisineTypeIgnoreCase(@Param("cuisine") String cuisine);
 
       @Query("SELECT r FROM Restaurant r WHERE r.acceptingOrders = true AND r.isActive = true")
       List<Restaurant> findByAcceptingOrdersTrue();
@@ -19,11 +19,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
       @Query("SELECT r FROM Restaurant r WHERE r.deliveryFee <= :fee AND r.isActive = true")
       List<Restaurant> findByDeliveryFeeLessThanEqual(@Param("fee") double fee);
 
-      @Query("SELECT r FROM Restaurant r WHERE r.restaurantOwner = :ownerId AND r.isActive = true")
+      @Query("SELECT r FROM Restaurant r WHERE r.owner.id = :ownerId AND r.isActive = true")
       List<Restaurant> findByOwnerId(@Param("ownerId") Integer ownerId);
 
-      @Query("SELECT r FROM Restaurant r " +
-              "WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-              "AND r.isActive = true")
-      List<Restaurant> searchByName(@Param("keyword") String keyword);
+      @Query("SELECT r FROM Restaurant r WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :keyword, '%')) AND r.isActive = true")
+      List<Restaurant> searchByNameKeyword(@Param("keyword") String keyword);
 }

@@ -2,34 +2,37 @@ package com.codeline.food_delivery_platform.DTO.Request;
 
 import com.codeline.food_delivery_platform.Entities.Restaurant;
 import com.codeline.food_delivery_platform.Entities.RestaurantOwner;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class RestaurantRequestDTO {
+import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RestaurantRequestDTO {
     @NotBlank
     private String name;
+    @NotBlank private String description;
+    @NotBlank private String cuisineType;
+    @PositiveOrZero
+    private double minOrderAmount;
+    @PositiveOrZero private double deliveryFee;
 
-    @NotBlank
-    private String cuisineType;
-
-    @DecimalMin("0.0")
-    private double deliveryFee;
-
-    @NotNull
-    private RestaurantOwner owner;
-
-    public static Restaurant toEntity(RestaurantRequestDTO dto){
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName(dto.getName());
-        restaurant.setCuisineType(dto.getCuisineType());
-        restaurant.setDeliveryFee(dto.getDeliveryFee());
-        restaurant.setRestaurantOwner(dto.getOwner());
-        return restaurant;
+    public Restaurant toEntity(RestaurantOwner owner) {
+        Restaurant r = new Restaurant();
+        r.setName(name);
+        r.setDescription(description);
+        r.setCuisineType(cuisineType);
+        r.setMinOrderAmount(minOrderAmount);
+        r.setDeliveryFee(deliveryFee);
+        r.setOwner(owner);
+        r.setIsActive(true);
+        r.setCreatedDate(LocalDateTime.now());
+        r.setUpdatedDate(LocalDateTime.now());
+        return r;
     }
 }
