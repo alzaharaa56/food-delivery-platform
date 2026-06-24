@@ -1,4 +1,4 @@
-package com.codeline.food_delivery_platform.Services;
+package com.codeline.food_delivery_platform.services;
 
 import com.codeline.food_delivery_platform.dto.request.RestaurantRequest;
 import com.codeline.food_delivery_platform.dto.response.RestaurantResponse;
