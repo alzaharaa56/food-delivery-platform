@@ -1,0 +1,43 @@
+package com.codeline.food_delivery_platform.Entities;
+
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
+
+@Entity
+@Table(name = "combo_meals")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ComboMeal extends BaseEntity{
+
+    private String comboName;
+
+    private String description;
+
+    private Double totalPrice;
+
+    private Boolean isAvailable = true;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Restaurant restaurant;
+
+    @ManyToMany
+    @JoinTable(
+            name = "combo_meal_items",
+            joinColumns = @JoinColumn(name = "combo_meal_id"),
+            inverseJoinColumns = @JoinColumn(name = "menu_item_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<MenuItem> menuItems;
+}
