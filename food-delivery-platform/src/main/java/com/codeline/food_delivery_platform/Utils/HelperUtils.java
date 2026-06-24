@@ -1,4 +1,4 @@
-package com.codeline.food_delivery_platform.utils;
+package com.codeline.food_delivery_platform.Utils;
 
 import java.time.LocalTime;
 import java.util.Random;
