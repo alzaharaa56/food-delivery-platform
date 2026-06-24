@@ -2,6 +2,7 @@ package com.codeline.food_delivery_platform.Controllers;
 
 import com.codeline.food_delivery_platform.dto.request.RestaurantRequest;
 import com.codeline.food_delivery_platform.dto.response.RestaurantResponse;
+import com.codeline.food_delivery_platform.dto.summary.RestaurantSummaryResponse;
 import com.codeline.food_delivery_platform.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RestaurantResponse>> getAllRestaurants() {
-        return ResponseEntity.ok(restaurantService.getAllRestaurants());
+    public ResponseEntity<List<RestaurantSummaryResponse>> getAllRestaurants() {
+        return ResponseEntity.ok(restaurantService.getAllRestaurantsSummary());
     }
 }

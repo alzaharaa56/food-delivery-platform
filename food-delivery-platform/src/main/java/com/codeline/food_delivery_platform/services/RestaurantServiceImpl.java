@@ -16,13 +16,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
-
     @Autowired
     private RestaurantRepository restaurantRepository;
-
     @Autowired
     private RestaurantOwnerRepository ownerRepository;
-
     @Override
     public RestaurantResponse createRestaurant(RestaurantRequest request) {
         RestaurantOwner owner = ownerRepository.findById(request.getOwnerId())
@@ -39,7 +36,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         return RestaurantResponse.fromEntity(savedRestaurant);
     }
-
     @Override
     public RestaurantResponse getRestaurantById(Integer id) {
         Restaurant restaurant = restaurantRepository.findById(id)
